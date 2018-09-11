@@ -209,7 +209,10 @@ for (i in 1:epochs) {
   cat("Epoch: ", i,"\n")
 }
 
-save(model,file=paste("output/lstmModel/model_lag",lag_setting,"_batch",batch_size,"_epochs",epochs,".Rdata",sep=""))
+save_model_hdf5(model, file=paste("output/lstmModel/model_lag",lag_setting,"_batch",batch_size,"_epochs",epochs,".h5",sep=""), overwrite = TRUE,
+                include_optimizer = TRUE)
+
+load_model_hdf5(file=paste("output/lstmModel/model_lag",lag_setting,"_batch",batch_size,"_epochs",epochs,".h5",sep=""), custom_objects = NULL, compile = TRUE)
 
 # Make Predictions
 pred_out <- model %>% 
